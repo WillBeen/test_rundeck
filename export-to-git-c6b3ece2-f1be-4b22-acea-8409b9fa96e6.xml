@@ -1,0 +1,34 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='commit-message' required='true' />
+      </options>
+    </context>
+    <defaultTab>summary</defaultTab>
+    <description></description>
+    <executionEnabled>true</executionEnabled>
+    <loglevel>INFO</loglevel>
+    <name>export-to-git</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <script><![CDATA[#!/bin/bash
+eval `ssh-agent -s`
+ssh-add -D
+ssh-add ~/var/storage/content/keys/willbeen.rsa
+
+cd /var/rundeck/projects/$RD_JOB_PROJECT/scm
+sed '/          <uuid>.*<\/uuid>/d' *.xml
+
+git add .
+git commit -m "$RD_OPTION_COMMIT_MESSAGE"
+git push
+
+ssh-agent -k]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+  </job>
+</joblist>
