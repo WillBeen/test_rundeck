@@ -20,7 +20,7 @@ ssh-add -D
 ssh-add ~/var/storage/content/keys/willbeen.rsa
 
 cd /var/rundeck/projects/$RD_JOB_PROJECT/scm
-sed '/          <uuid>.*<\/uuid>/d' *.xml
+sed -i '/          <uuid>.*<\/uuid>/d' *.xml
 
 git add .
 git commit -m "$RD_OPTION_COMMIT_MESSAGE"

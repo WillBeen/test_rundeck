@@ -10,7 +10,6 @@
     <sequence keepgoing='false' strategy='node-first'>
       <command>
         <jobref name='called'>
-          <uuid>9fcf7aa5-212d-4f7a-b5b8-293741d2ec1a</uuid>
         </jobref>
       </command>
     </sequence>
